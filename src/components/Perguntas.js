@@ -1,25 +1,38 @@
 import styled from "styled-components"
 import vira from "../assets/img/seta_virar.png"
 import play from "../assets/img/seta_play.png"
-export default function Perguntas() {
+import {useState} from "react"
+export default function Perguntas({card, num}) {
+    const [theCard, setTheCard] = useState(true);
+    const [resp, setResp] = useState(true);
+
+    function abrirPergunta(){
+        setTheCard(false);
+    }
+    function abrirResposta(){
+        setResp(false);
+    }
+
     return (
         <>
-            <PerguntaFechada>
-                <p>Pergunta 1</p>
-                <img src={play} />
-            </PerguntaFechada>
-            <PerguntaAberta>
-                <p>aqui jás a pergunta</p>
-                <img src={vira} />
-            </PerguntaAberta>
-            <PerguntaAberta>
-                <p>aqui jás a resposta</p>
+            {theCard && <PerguntaFechada>
+                <p>Pergunta {num}</p>
+                <img onClick={()=>abrirPergunta()} src={play} />
+            </PerguntaFechada>}
+
+            {!theCard && resp && <PerguntaAberta>
+                <p>{card.question}</p>
+                <img onClick={()=>abrirResposta()} src={vira} />
+            </PerguntaAberta>}
+
+            {!resp && <PerguntaAberta>
+                <p>{card.answer}</p>
                 <OsBotoes>
                     <Botoes>Não lembrei</Botoes>
                     <Botoes>Quase não lembrei</Botoes>
                     <Botoes>Zap!</Botoes>
                 </OsBotoes>
-            </PerguntaAberta>
+            </PerguntaAberta>}
         </>
     )
 }

@@ -3,6 +3,7 @@ import styled from "styled-components"
 import Logo from "./components/Logo"
 import Perguntas from "./components/Perguntas"
 import Footer from "./components/Footer"
+import { useState } from "react"
 function App() {
 
   const cards = [
@@ -15,13 +16,20 @@ function App() {
     { question: "Usamos props para __", answer: "Passar diferentes informações para componentes" },
     { question: "Usamos estado (state) para __", answer: "Dizer para o React quais informações quando atualizadas devem renderizar a tela novamente" }
   ]
+  let numPergunta =1
 
   return (
     <>
       <GlobalStyle />
       <Conteudo>
+
         <Logo />
-        <Perguntas card={cards} />
+        {cards.map((card) => <Perguntas
+          key={card.question}
+          card={card} 
+          num={numPergunta++}
+        />)}
+
         <Footer />
       </Conteudo>
     </>
@@ -38,5 +46,5 @@ const Conteudo = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 0px;
-  padding: 0px;
+  padding: 0px 0px 80px 0px;
 `
