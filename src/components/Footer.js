@@ -1,7 +1,7 @@
 import styled from "styled-components"
 export default function Footer() {
     return (
-        <OFundo>
+        <OFundo data-test="footer" >
             -quantidade- Concluidos
         </OFundo>
     )

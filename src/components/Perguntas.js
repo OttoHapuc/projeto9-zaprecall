@@ -46,28 +46,28 @@ export default function Perguntas({card, num}) {
     }
 
     return (
-        <>
+        <div data-test="flashcard">
             {theCard && <PerguntaFechada 
             encerraQuestao = {habilitathrough}
             cor={cor}>
-                <p>Pergunta {num}</p>
-                <img onClick={()=>abrirPergunta()} src={imagens[botao]} />
+                <p data-test="flashcard-text">Pergunta {num}</p>
+                <img data-test="play-btn" onClick={()=>abrirPergunta()} src={imagens[botao]} />
             </PerguntaFechada>}
 
             {!theCard && resp && <PerguntaAberta>
-                <p>{card.question}</p>
-                <img onClick={()=>abrirResposta()} src={vira} />
+                <p data-test="flashcard-text">{card.question}</p>
+                <img data-test="turn-btn" onClick={()=>abrirResposta()} src={vira} />
             </PerguntaAberta>}
 
             {!resp && <PerguntaAberta>
-                <p>{card.answer}</p>
+                <p data-test="flashcard-text">{card.answer}</p>
                 <OsBotoes>
-                    <Botoe1 onClick={()=>NaoLembrei()}>Não lembrei</Botoe1>
-                    <Botoe2 onClick={()=>QuaseLembrei()}>Quase não lembrei</Botoe2>
-                    <Botoe3 onClick={()=>Zap()}>Zap!</Botoe3>
+                    <Botoe1 data-test="no-btn" onClick={()=>NaoLembrei()}>Não lembrei</Botoe1>
+                    <Botoe2 data-test="partial-btn" onClick={()=>QuaseLembrei()}>Quase não lembrei</Botoe2>
+                    <Botoe3 data-test="zap-btn" onClick={()=>Zap()}>Zap!</Botoe3>
                 </OsBotoes>
             </PerguntaAberta>}
-        </>
+        </div>
     )
 }
 
