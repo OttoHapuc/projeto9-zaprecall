@@ -1,10 +1,16 @@
 import styled from "styled-components"
 import vira from "../assets/img/seta_virar.png"
 import play from "../assets/img/seta_play.png"
+import win from "../assets/img/icone_certo.png"
+import ahh from "../assets/img/icone_quase.png"
+import loser from "../assets/img/icone_erro.png"
+
 import {useState} from "react"
 export default function Perguntas({card, num}) {
     const [theCard, setTheCard] = useState(true);
     const [resp, setResp] = useState(true);
+    const [cor, setCor] = useState("#333333");
+
 
     function abrirPergunta(){
         setTheCard(false);
@@ -13,11 +19,39 @@ export default function Perguntas({card, num}) {
         setResp(false);
     }
 
+    const imagens = [play, win, ahh, loser]
+    const [botao, setBotao] = useState(0);
+    const [habilitathrough, setHabilitaThrough] = useState(false)
+
+    function NaoLembrei(){ 
+        setTheCard(true); 
+        setResp(true); 
+        setBotao(3);
+        setHabilitaThrough(true);
+        setCor("#FF3030")
+    }
+    function QuaseLembrei(){ 
+        setTheCard(true); 
+        setResp(true); 
+        setBotao(2);
+        setHabilitaThrough(true);
+        setCor("#FF922E")
+    }
+    function Zap(){ 
+        setTheCard(true); 
+        setResp(true); 
+        setBotao(1);
+        setHabilitaThrough(true);
+        setCor("#2FBE34")
+    }
+
     return (
         <>
-            {theCard && <PerguntaFechada>
+            {theCard && <PerguntaFechada 
+            encerraQuestao = {habilitathrough}
+            cor={cor}>
                 <p>Pergunta {num}</p>
-                <img onClick={()=>abrirPergunta()} src={play} />
+                <img onClick={()=>abrirPergunta()} src={imagens[botao]} />
             </PerguntaFechada>}
 
             {!theCard && resp && <PerguntaAberta>
@@ -28,9 +62,9 @@ export default function Perguntas({card, num}) {
             {!resp && <PerguntaAberta>
                 <p>{card.answer}</p>
                 <OsBotoes>
-                    <Botoes>Não lembrei</Botoes>
-                    <Botoes>Quase não lembrei</Botoes>
-                    <Botoes>Zap!</Botoes>
+                    <Botoe1 onClick={()=>NaoLembrei()}>Não lembrei</Botoe1>
+                    <Botoe2 onClick={()=>QuaseLembrei()}>Quase não lembrei</Botoe2>
+                    <Botoe3 onClick={()=>Zap()}>Zap!</Botoe3>
                 </OsBotoes>
             </PerguntaAberta>}
         </>
@@ -54,7 +88,8 @@ const PerguntaFechada = styled.div`
         font-weight: 700;
         font-size: 16px;
         line-height: 19px;
-        color: #333333;
+        color: ${prop => prop.cor};
+        text-decoration: ${prop => prop.encerraQuestao ?  'line-through' : ""}
     }
 `
 const PerguntaAberta = styled.div`
@@ -86,7 +121,7 @@ const OsBotoes = styled.div`
     justify-content: space-between;
     margin: 6px;
 `
-const Botoes = styled.button`
+const Botoe1 = styled.button`
     width: 90px;
     font-family: 'Recursive';
     font-style: normal;
@@ -97,9 +132,40 @@ const Botoes = styled.button`
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: #FFFFFF;
-    background: blue;
+    background-color: #FF3030;
     border-radius: 5px;
-    border: 1px solid blue;
+    border: none;
+    padding:5px;
+`
+const Botoe2 = styled.button`
+    width: 90px;
+    font-family: 'Recursive';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #FF922E;
+    border-radius: 5px;
+    border: none;
+    padding:5px;
+`
+const Botoe3 = styled.button`
+    width: 90px;
+    font-family: 'Recursive';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #2FBE34;
+    border-radius: 5px;
+    border: none;
     padding:5px;
 `
