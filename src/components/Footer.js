@@ -1,8 +1,8 @@
 import styled from "styled-components"
-export default function Footer() {
+export default function Footer({cards, card}) {
     return (
         <OFundo data-test="footer" >
-            -quantidade- Concluidos
+           {card} / {cards.length} Concluidos
         </OFundo>
     )
 }

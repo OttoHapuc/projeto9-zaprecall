@@ -18,21 +18,29 @@ function App() {
   ])
   let numPergunta =1
 
-  return (
+  const[cardPronto, setCardPronto] = useState(0)
+    return (
     <>
       <GlobalStyle />
       <Conteudo>
 
         <Logo />
+        
         {cards.map((card) => <Perguntas
           key={card.question}
           card={card} 
           num={numPergunta++}
           cards={cards}
           setCards={setCards}
+          cardPronto={cardPronto}
+          setCardPronto={setCardPronto}
         />)}
 
-        <Footer />
+        <Footer 
+        cards={cards}
+        card={cardPronto}
+        />
+        
       </Conteudo>
     </>
   );

@@ -6,7 +6,7 @@ import ahh from "../assets/img/icone_quase.png"
 import loser from "../assets/img/icone_erro.png"
 
 import {useState} from "react"
-export default function Perguntas({card, num}) {
+export default function Perguntas({card, num, cardPronto, setCardPronto}) {
     const [theCard, setTheCard] = useState(true);
     const [resp, setResp] = useState(true);
     const [cor, setCor] = useState("#333333");
@@ -23,26 +23,27 @@ export default function Perguntas({card, num}) {
     const [botao, setBotao] = useState(0);
     const [habilitathrough, setHabilitaThrough] = useState(false)
 
-    function NaoLembrei(){ 
+    function cleanCode() {
         setTheCard(true); 
         setResp(true); 
-        setBotao(3);
         setHabilitaThrough(true);
+        setCardPronto(cardPronto+1)
+    }
+
+    function NaoLembrei(){ 
+        setBotao(3);
         setCor("#FF3030")
+        cleanCode()
     }
     function QuaseLembrei(){ 
-        setTheCard(true); 
-        setResp(true); 
-        setBotao(2);
-        setHabilitaThrough(true);
+        setBotao(2);  
         setCor("#FF922E")
+        cleanCode()
     }
     function Zap(){ 
-        setTheCard(true); 
-        setResp(true); 
         setBotao(1);
-        setHabilitaThrough(true);
         setCor("#2FBE34")
+        cleanCode()
     }
 
     return (
